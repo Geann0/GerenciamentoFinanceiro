@@ -6,6 +6,10 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
 [![Prisma](https://img.shields.io/badge/Prisma-5.22.0-2D3748)](https://www.prisma.io/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC)](https://tailwindcss.com/)
+[![License](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-Portfolio-brightgreen.svg)]()
+
+> ⚠️ **AVISO:** Este é um projeto proprietário. Veja [NOTICE.md](NOTICE.md) para detalhes de licenciamento.
 
 ---
 
@@ -28,6 +32,7 @@ Sistema profissional de gestão financeira que permite controlar receitas, despe
 ## 🚀 Tecnologias Utilizadas
 
 ### Frontend
+
 - **Next.js 14** - Framework React com SSR e App Router
 - **TypeScript** - Tipagem estática para maior segurança
 - **Tailwind CSS** - Estilização moderna e responsiva
@@ -36,6 +41,7 @@ Sistema profissional de gestão financeira que permite controlar receitas, despe
 - **Zod** - Validação de schemas
 
 ### Backend
+
 - **Node.js** - Runtime JavaScript
 - **Prisma ORM** - Gerenciamento de banco de dados
 - **SQLite** - Banco de dados (desenvolvimento)
@@ -43,6 +49,7 @@ Sistema profissional de gestão financeira que permite controlar receitas, despe
 - **bcrypt** - Criptografia de senhas
 
 ### Ferramentas
+
 - **Jest** - Testes unitários
 - **ESLint** - Linting de código
 - **Prettier** - Formatação de código
@@ -61,12 +68,14 @@ Sistema profissional de gestão financeira que permite controlar receitas, despe
 ### Passo a Passo
 
 1. **Clone o repositório**
+
 ```bash
 git clone https://github.com/seu-usuario/GerenciamentoFinanceiro.git
 cd GerenciamentoFinanceiro
 ```
 
 2. **Instale as dependências**
+
 ```bash
 npm install
 ```
@@ -78,6 +87,7 @@ cp .env.example .env
 ```
 
 Edite o arquivo `.env` com suas configurações:
+
 ```env
 DATABASE_URL="file:./dev.db"
 NEXTAUTH_SECRET="sua-chave-secreta-aqui"
@@ -85,17 +95,20 @@ NEXTAUTH_URL="http://localhost:3000"
 ```
 
 4. **Execute as migrations do banco de dados**
+
 ```bash
 npx prisma migrate dev
 npx prisma generate
 ```
 
 5. **Inicie o servidor de desenvolvimento**
+
 ```bash
 npm run dev
 ```
 
 6. **Acesse a aplicação**
+
 ```
 http://localhost:3000
 ```
@@ -105,22 +118,26 @@ http://localhost:3000
 ## 🎯 Como Usar
 
 ### 1️⃣ Criar Conta
+
 - Acesse a página inicial
 - Clique em "Começar Agora"
 - Preencha seus dados e crie sua conta
 
 ### 2️⃣ Configurar Categorias
+
 - Vá em "Categorias"
 - Crie categorias como: Alimentação, Transporte, Salário, etc.
 - Personalize com cores
 
 ### 3️⃣ Registrar Transações
+
 - Acesse "Transações"
 - Clique em "+ Nova Transação"
 - Preencha os dados (tipo, valor, categoria, data)
 - Salve
 
 ### 4️⃣ Visualizar Dashboard
+
 - O painel principal mostra:
   - Receitas e Despesas Totais
   - Saldo atual
@@ -129,6 +146,7 @@ http://localhost:3000
   - Transações recentes
 
 ### 5️⃣ Gerar Relatórios
+
 - Vá em "Relatórios"
 - Selecione o período desejado
 - Visualize o detalhamento
@@ -194,6 +212,7 @@ npm run lint             # Verifica código
 ## 📊 Funcionalidades Detalhadas
 
 ### Dashboard
+
 - ✅ Cards de resumo (Receitas, Despesas, Saldo)
 - ✅ Gráfico de linha - Tendência mensal
 - ✅ Gráfico de pizza - Distribuição por categorias
@@ -201,6 +220,7 @@ npm run lint             # Verifica código
 - ✅ Ações rápidas (Nova transação, Ver relatórios)
 
 ### Transações
+
 - ✅ Listagem com paginação
 - ✅ Filtros (Todas/Receitas/Despesas)
 - ✅ Criar, Editar e Deletar
@@ -209,6 +229,7 @@ npm run lint             # Verifica código
 - ✅ Busca e ordenação
 
 ### Categorias
+
 - ✅ Criação ilimitada
 - ✅ Seletor de cores
 - ✅ Contador de transações
@@ -216,6 +237,7 @@ npm run lint             # Verifica código
 - ✅ Edição e exclusão
 
 ### Relatórios
+
 - ✅ Filtros por período
 - ✅ Breakdown detalhado por categoria
 - ✅ Cálculo de percentuais
@@ -240,12 +262,14 @@ npm run lint             # Verifica código
 ## 🎨 Design System
 
 ### Cores Principais
+
 - **Primary**: `#0284c7` - Azul principal
 - **Success**: `#10b981` - Verde (receitas)
 - **Danger**: `#ef4444` - Vermelho (despesas)
 - **Warning**: `#f59e0b` - Amarelo (alertas)
 
 ### Componentes UI
+
 - Button (Primary, Secondary, Success, Danger)
 - Input (Text, Number, Date, Color)
 - Card (Container com sombra)
@@ -274,6 +298,7 @@ docker run -p 3000:3000 gerenciamento-financeiro
 ## 📝 Roadmap
 
 ### Futuras Melhorias
+
 - [ ] App mobile (React Native)
 - [ ] Multi-idiomas (i18n)
 - [ ] Integração bancária (Open Banking)
@@ -285,32 +310,88 @@ docker run -p 3000:3000 gerenciamento-financeiro
 
 ---
 
-## 🤝 Contribuindo
+## 💼 Contratação e Licenciamento
 
-Contribuições são bem-vindas! Para contribuir:
+### 🎯 Projeto de Portfólio
 
-1. Fork o projeto
-2. Crie uma branch (`git checkout -b feature/nova-funcionalidade`)
-3. Commit suas mudanças (`git commit -m 'Adiciona nova funcionalidade'`)
-4. Push para a branch (`git push origin feature/nova-funcionalidade`)
-5. Abra um Pull Request
+Este repositório demonstra minhas habilidades técnicas e está disponível para visualização pública. 
+
+### 💡 Interessado em projetos similares?
+
+Ofereço serviços de desenvolvimento customizado:
+
+- 🛠️ **Sistemas sob medida** baseados nesta arquitetura
+- 🎨 **Customização completa** de design e funcionalidades  
+- 📱 **Versões mobile** com React Native
+- 🔧 **Integração com APIs** externas (bancos, pagamentos, etc)
+- 📊 **Dashboards personalizados** para seu negócio
+- 🚀 **Deploy e manutenção** em produção
+
+### 📞 Entre em Contato:
+
+- 📧 **Email:** [Inserir seu email]
+- 💼 **LinkedIn:** [Inserir link]
+- 🐙 **GitHub:** [@Geann0](https://github.com/Geann0)
+- 💻 **99Freelas:** [Inserir perfil]
+
+### 💰 Licença Comercial
+
+Para uso comercial deste sistema, entre em contato para discutir licenciamento.
+
+---
+
+## 🤝 Sobre Contribuições
+
+Este é um projeto proprietário. Contribuições não são aceitas no momento, mas agradeço o interesse!
 
 ---
 
 ## 📄 Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+**Todos os direitos reservados © 2024-2025 Geann0**
+
+Este projeto está sob licença proprietária de uso não-comercial. Veja os arquivos [LICENSE](LICENSE) e [NOTICE.md](NOTICE.md) para detalhes completos sobre uso permitido e restrições.
+
+**⚠️ Uso comercial requer licença específica. Entre em contato para licenciamento.**
 
 ---
 
 ## 👤 Autor
+---
 
-Desenvolvido com ❤️ para ajudar pessoas a ter controle total sobre suas finanças.
+## 👤 Autor
+
+**Geann0** - Desenvolvedor Full Stack
+
+Desenvolvido com ❤️ e dedicação para demonstrar excelência técnica em desenvolvimento web moderno.
+
+### 🌟 Minhas Especializações:
+
+- ⚛️ React/Next.js & TypeScript
+- 🗄️ Node.js & Prisma ORM
+- 🎨 Tailwind CSS & UI/UX
+- 🔐 Autenticação & Segurança
+- 📊 Dashboards & Data Visualization
+- 🚀 Deploy & DevOps
 
 ---
 
 <div align="center">
-  <strong>⭐ Se este projeto foi útil, deixe uma estrela! ⭐</strong>
+  
+### 💼 Disponível para Projetos Freelance
+
+**Precisa de um sistema similar? Entre em contato!**
+
+[![Email](https://img.shields.io/badge/Email-Contact-red?style=for-the-badge&logo=gmail)](mailto:[seu-email])
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/[seu-perfil])
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=for-the-badge&logo=github)](https://github.com/Geann0)
+
+---
+
+**⭐ Se este projeto impressionou você, deixe uma estrela! ⭐**
+
+**🔒 Projeto Proprietário - Todos os direitos reservados © 2024-2025**
+
 </div>
 POST /api/categories
 Body: { name, description, color, icon, parentId }
