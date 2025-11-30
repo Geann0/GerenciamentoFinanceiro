@@ -329,10 +329,11 @@ Ofereço serviços de desenvolvimento customizado:
 
 ### 📞 Entre em Contato:
 
-- 📧 **Email:** [Inserir seu email]
-- 💼 **LinkedIn:** [Inserir link]
+- 📧 **Email:** haduckcometa@gmail.com
+- 📱 **WhatsApp:** +55 69 99350-0039
+- 📷 **Instagram:** [@cgeann45r](https://instagram.com/cgeann45r)
+- 💼 **LinkedIn:** [Geann Carlos](https://www.linkedin.com/in/geann-carlos-de-paula-freitas-20851229a)
 - 🐙 **GitHub:** [@Geann0](https://github.com/Geann0)
-- 💻 **99Freelas:** [Inserir perfil]
 
 ### 💰 Licença Comercial
 
@@ -382,9 +383,11 @@ Desenvolvido com ❤️ e dedicação para demonstrar excelência técnica em de
 
 **Precisa de um sistema similar? Entre em contato!**
 
-[![Email](https://img.shields.io/badge/Email-Contact-red?style=for-the-badge&logo=gmail)](mailto:[seu-email])
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/[seu-perfil])
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=for-the-badge&logo=github)](https://github.com/Geann0)
+[![Email](https://img.shields.io/badge/Email-Contact-red?style=for-the-badge&logo=gmail)](mailto:haduckcometa@gmail.com)
+[![WhatsApp](https://img.shields.io/badge/WhatsApp-Chat-25D366?style=for-the-badge&logo=whatsapp)](https://wa.me/5569993500039)
+[![Instagram](https://img.shields.io/badge/Instagram-Follow-E4405F?style=for-the-badge&logo=instagram)](https://instagram.com/cgeann45r)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/geann-carlos-de-paula-freitas-20851229a)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github)](https://github.com/Geann0)
 
 ---
 

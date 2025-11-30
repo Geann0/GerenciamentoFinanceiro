@@ -53,10 +53,11 @@ Este software está disponível para licenciamento comercial sob termos personal
 
 ### 📞 Contato:
 
-- 📧 **Email:** [Inserir seu email]
-- 💼 **LinkedIn:** [Inserir link]
-- 🐙 **GitHub:** https://github.com/Geann0
-- 💻 **99Freelas:** [Inserir perfil]
+- 📧 **Email:** haduckcometa@gmail.com
+- 📱 **WhatsApp:** +55 69 99350-0039
+- 📷 **Instagram:** [@cgeann45r](https://instagram.com/cgeann45r)
+- 💼 **LinkedIn:** [Geann Carlos](https://www.linkedin.com/in/geann-carlos-de-paula-freitas-20851229a)
+- 🐙 **GitHub:** [@Geann0](https://github.com/Geann0)
 
 ---
 
