@@ -6,11 +6,14 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { Toast, ConfirmDialog } from "@/components/ui/Toast";
 
 export default function CategoriesPage() {
   const { data: session } = useSession();
   const queryClient = useQueryClient();
   const [showForm, setShowForm] = useState(false);
+  const [toast, setToast] = useState<{ message: string; type: "success" | "error" | "warning" | "info" } | null>(null);
+  const [confirmDialog, setConfirmDialog] = useState<{ message: string; onConfirm: () => void } | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     color: "#3B82F6",
@@ -43,7 +46,7 @@ export default function CategoriesPage() {
         setShowForm(false);
       },
       onError: (error: any) => {
-        alert("Erro ao criar categoria: " + error.message);
+        setToast({ message: error.message, type: "error" });
       },
     }
   );
@@ -64,9 +67,10 @@ export default function CategoriesPage() {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("categories");
+        setToast({ message: "Categoria deletada com sucesso!", type: "success" });
       },
       onError: (error: any) => {
-        alert("Erro ao deletar categoria: " + error.message);
+        setToast({ message: error.message, type: "error" });
       },
     }
   );
@@ -196,9 +200,13 @@ export default function CategoriesPage() {
                 </div>
                 <button
                   onClick={() => {
-                    if (confirm(`Deseja realmente deletar a categoria "${category.name}"?`)) {
-                      deleteCategory.mutate(category.id);
-                    }
+                    setConfirmDialog({
+                      message: `Deseja realmente deletar a categoria "${category.name}"?`,
+                      onConfirm: () => {
+                        deleteCategory.mutate(category.id);
+                        setConfirmDialog(null);
+                      },
+                    });
                   }}
                   className="text-danger-600 hover:text-danger-700 p-2 hover:bg-danger-50 rounded-lg transition-colors flex-shrink-0"
                   title="Deletar categoria"
@@ -225,6 +233,26 @@ export default function CategoriesPage() {
           </Card>
         )}
       </div>
+
+      {/* Toast Notification */}
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
+
+      {/* Confirm Dialog */}
+      {confirmDialog && (
+        <ConfirmDialog
+          message={confirmDialog.message}
+          onConfirm={confirmDialog.onConfirm}
+          onCancel={() => setConfirmDialog(null)}
+          confirmText="Deletar"
+          cancelText="Cancelar"
+        />
+      )}
     </div>
   );
 }
