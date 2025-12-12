@@ -314,14 +314,14 @@ docker run -p 3000:3000 gerenciamento-financeiro
 
 ### 🎯 Projeto de Portfólio
 
-Este repositório demonstra minhas habilidades técnicas e está disponível para visualização pública. 
+Este repositório demonstra minhas habilidades técnicas e está disponível para visualização pública.
 
 ### 💡 Interessado em projetos similares?
 
 Ofereço serviços de desenvolvimento customizado:
 
 - 🛠️ **Sistemas sob medida** baseados nesta arquitetura
-- 🎨 **Customização completa** de design e funcionalidades  
+- 🎨 **Customização completa** de design e funcionalidades
 - 📱 **Versões mobile** com React Native
 - 🔧 **Integração com APIs** externas (bancos, pagamentos, etc)
 - 📊 **Dashboards personalizados** para seu negócio
@@ -358,6 +358,7 @@ Este projeto está sob licença proprietária de uso não-comercial. Veja os arq
 ---
 
 ## 👤 Autor
+
 ---
 
 ## 👤 Autor

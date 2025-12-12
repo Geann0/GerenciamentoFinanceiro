@@ -1,9 +1,9 @@
-import sgMail from "@sendgrid/mail";
+import { Resend } from 'resend';
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const FROM_EMAIL =
-  process.env.SENDGRID_FROM_EMAIL || "noreply@financesystem.com";
+  process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
 
 export interface SendEmailParams {
   to: string;
@@ -18,16 +18,14 @@ export async function sendEmail({
   text,
   html,
 }: SendEmailParams): Promise<void> {
-  const msg = {
-    to,
-    from: FROM_EMAIL,
-    subject,
-    text,
-    html,
-  };
-
   try {
-    await sgMail.send(msg);
+    await resend.emails.send({
+      from: FROM_EMAIL,
+      to,
+      subject,
+      html,
+      text,
+    });
     console.log(`Email sent successfully to ${to}`);
   } catch (error) {
     console.error("Error sending email:", error);
