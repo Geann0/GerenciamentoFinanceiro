@@ -91,23 +91,32 @@ export class CategoryService {
   }
 
   async deleteCategory(categoryId: string, userId: string) {
+    // Check if category exists and belongs to user
+    const category = await prisma.category.findFirst({
+      where: { id: categoryId, userId },
+    });
+
+    if (!category) {
+      throw new Error("Categoria não encontrada");
+    }
+
     // Check if category has transactions
     const transactionCount = await prisma.transaction.count({
       where: { categoryId },
     });
 
     if (transactionCount > 0) {
-      throw new Error("Cannot delete category with existing transactions");
+      throw new Error(`Não é possível deletar esta categoria pois ela possui ${transactionCount} transação(ões) associada(s)`);
     }
 
-    // Delete category and subcategories
+    // Delete subcategories first
     await prisma.category.deleteMany({
-      where: {
-        OR: [
-          { id: categoryId, userId },
-          { parentId: categoryId, userId },
-        ],
-      },
+      where: { parentId: categoryId, userId },
+    });
+
+    // Delete the category
+    await prisma.category.delete({
+      where: { id: categoryId },
     });
   }
 
