@@ -19,6 +19,7 @@ export default function CategoriesPage() {
 
   const { data: categories, isLoading } = useQuery("categories", async () => {
     const response = await fetch("/api/categories?all=true");
+    if (!response.ok) throw new Error('Failed to fetch');
     return response.json();
   });
 
@@ -29,7 +30,10 @@ export default function CategoriesPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      if (!response.ok) throw new Error("Falha ao criar categoria");
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || "Falha ao criar categoria");
+      }
       return response.json();
     },
     {
@@ -37,6 +41,10 @@ export default function CategoriesPage() {
         queryClient.invalidateQueries("categories");
         setFormData({ name: "", color: "#3B82F6", description: "" });
         setShowForm(false);
+        alert("Categoria criada com sucesso!");
+      },
+      onError: (error: any) => {
+        alert("Erro ao criar categoria: " + error.message);
       },
     }
   );
@@ -134,8 +142,8 @@ export default function CategoriesPage() {
                 />
               </div>
 
-              <Button type="submit" variant="primary" className="w-full">
-                Criar Categoria
+              <Button type="submit" variant="primary" className="w-full" disabled={createCategory.isLoading}>
+                {createCategory.isLoading ? "Criando..." : "Criar Categoria"}
               </Button>
             </form>
           </Card>

@@ -23,7 +23,13 @@ export async function POST(request: NextRequest) {
       validation.data
     );
 
-    return NextResponse.json(category, { status: 201 });
+    // Invalidate cache on creation
+    return NextResponse.json(category, { 
+      status: 201,
+      headers: {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+      },
+    });
   } catch (error) {
     console.error("Create category error:", error);
     return NextResponse.json(
