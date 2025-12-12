@@ -163,9 +163,6 @@ export default function CategoriesPage() {
                       {category.description}
                     </p>
                   )}
-                  <div className="mt-2 flex items-center gap-2 text-xs text-gray-500">
-                    <span>{category._count?.transactions || 0} transações</span>
-                  </div>
                 </div>
               </div>
             </Card>
