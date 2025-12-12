@@ -41,31 +41,34 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8">
-        <div className="mb-8 flex justify-between items-center">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900">
-              Bem-vindo, {session?.user?.name}!
-            </h1>
-            <p className="text-gray-600">Aqui está sua visão financeira</p>
-          </div>
-          <Button
-            variant="primary"
-            onClick={() => setShowTransactionForm(!showTransactionForm)}
-            data-testid="create-transaction-btn"
-          >
-            {showTransactionForm ? "Cancelar" : "+ Nova Transação"}
-          </Button>
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900">
+            Bem-vindo, {session?.user?.name}!
+          </h1>
+          <p className="text-gray-600">Aqui está sua visão financeira</p>
         </div>
 
-        {/* Transaction Form - Appears at Top */}
+        {/* Transaction Form Modal */}
         {showTransactionForm && categories && (
-          <Card className="mb-8">
-            <h4 className="text-xl font-semibold mb-4">Nova Transação</h4>
-            <TransactionForm
-              categories={categories}
-              onSuccess={() => setShowTransactionForm(false)}
-            />
-          </Card>
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="sticky top-0 bg-white border-b px-6 py-4 flex justify-between items-center">
+                <h4 className="text-xl font-semibold text-gray-900">Nova Transação</h4>
+                <button
+                  onClick={() => setShowTransactionForm(false)}
+                  className="text-gray-400 hover:text-gray-600 text-2xl"
+                >
+                  ×
+                </button>
+              </div>
+              <div className="p-6">
+                <TransactionForm
+                  categories={categories}
+                  onSuccess={() => setShowTransactionForm(false)}
+                />
+              </div>
+            </div>
+          </div>
         )}
 
         {/* Balance Overview */}
@@ -160,6 +163,14 @@ export default function DashboardPage() {
           <div>
             <Card title="Ações Rápidas">
               <div className="space-y-3">
+                <Button
+                  variant="primary"
+                  className="w-full"
+                  onClick={() => setShowTransactionForm(true)}
+                  data-testid="create-transaction-btn"
+                >
+                  + Nova Transação
+                </Button>
                 <Button
                   variant="secondary"
                   className="w-full"
