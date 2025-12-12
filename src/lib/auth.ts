@@ -14,7 +14,7 @@ const loginSchema = z.object({
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   session: {
-    strategy: "jwt",
+    strategy: "database",
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   pages: {
@@ -77,27 +77,15 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user, account }) {
-      if (user) {
-        token.id = user.id;
-        token.email = user.email;
-        token.name = user.name;
-      }
-
-      if (account) {
-        token.accessToken = account.access_token;
-        token.refreshToken = account.refresh_token;
-      }
-
-      return token;
+    async signIn({ user, account, profile }) {
+      // Permitir login com Google e credentials
+      return true;
     },
-    async session({ session, token }) {
-      if (token) {
-        session.user.id = token.id as string;
-        session.user.email = token.email as string;
-        session.user.name = token.name as string;
+    async session({ session, user }) {
+      // Com strategy: "database", o user vem do banco
+      if (user) {
+        session.user.id = user.id;
       }
-
       return session;
     },
   },
