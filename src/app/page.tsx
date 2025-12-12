@@ -44,7 +44,7 @@ export default async function HomePage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold mb-2">Rastreie Transações</h3>
+            <h3 className="text-xl font-semibold mb-2 text-gray-900">Rastreie Transações</h3>
             <p className="text-gray-600">
               Registre receitas e despesas com categorização detalhada e tags
             </p>
@@ -56,7 +56,7 @@ export default async function HomePage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold mb-2">Relatórios Avançados</h3>
+            <h3 className="text-xl font-semibold mb-2 text-gray-900">Relatórios Avançados</h3>
             <p className="text-gray-600">
               Gere relatórios financeiros detalhados com gráficos e opções de
               exportação
@@ -69,7 +69,7 @@ export default async function HomePage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold mb-2">Seguro e Privado</h3>
+            <h3 className="text-xl font-semibold mb-2 text-gray-900">Seguro e Privado</h3>
             <p className="text-gray-600">
               Segurança de nível bancário com OAuth 2.0 e armazenamento de dados
               criptografados
@@ -83,9 +83,13 @@ export default async function HomePage() {
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="flex items-start gap-3">
-              <span className="text-2xl">✅</span>
+              <div className="flex-shrink-0 w-6 h-6 rounded-full bg-success-100 flex items-center justify-center">
+                <svg className="w-4 h-4 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
               <div>
-                <h4 className="font-semibold">Gestão de Transações</h4>
+                <h4 className="font-semibold text-gray-900">Gestão de Transações</h4>
                 <p className="text-sm text-gray-600">
                   Operações completas de CRUD com filtragem avançada
                 </p>
@@ -93,9 +97,13 @@ export default async function HomePage() {
             </div>
 
             <div className="flex items-start gap-3">
-              <span className="text-2xl">✅</span>
+              <div className="flex-shrink-0 w-6 h-6 rounded-full bg-success-100 flex items-center justify-center">
+                <svg className="w-4 h-4 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
               <div>
-                <h4 className="font-semibold">Organização por Categorias</h4>
+                <h4 className="font-semibold text-gray-900">Organização por Categorias</h4>
                 <p className="text-sm text-gray-600">
                   Categorias hierárquicas com subcategorias e tags
                 </p>
@@ -103,9 +111,13 @@ export default async function HomePage() {
             </div>
 
             <div className="flex items-start gap-3">
-              <span className="text-2xl">✅</span>
+              <div className="flex-shrink-0 w-6 h-6 rounded-full bg-success-100 flex items-center justify-center">
+                <svg className="w-4 h-4 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
               <div>
-                <h4 className="font-semibold">Anexos de Arquivos</h4>
+                <h4 className="font-semibold text-gray-900">Anexos de Arquivos</h4>
                 <p className="text-sm text-gray-600">
                   Envie recibos para AWS S3 ou Google Drive
                 </p>
@@ -113,9 +125,13 @@ export default async function HomePage() {
             </div>
 
             <div className="flex items-start gap-3">
-              <span className="text-2xl">✅</span>
+              <div className="flex-shrink-0 w-6 h-6 rounded-full bg-success-100 flex items-center justify-center">
+                <svg className="w-4 h-4 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
               <div>
-                <h4 className="font-semibold">Notificações por Email</h4>
+                <h4 className="font-semibold text-gray-900">Notificações por Email</h4>
                 <p className="text-sm text-gray-600">
                   Alertas automatizados para transações e orçamentos
                 </p>
@@ -123,9 +139,13 @@ export default async function HomePage() {
             </div>
 
             <div className="flex items-start gap-3">
-              <span className="text-2xl">✅</span>
+              <div className="flex-shrink-0 w-6 h-6 rounded-full bg-success-100 flex items-center justify-center">
+                <svg className="w-4 h-4 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
               <div>
-                <h4 className="font-semibold">Integração de Pagamentos</h4>
+                <h4 className="font-semibold text-gray-900">Integração de Pagamentos</h4>
                 <p className="text-sm text-gray-600">
                   Integração com Stripe para pagamentos sem complicações
                 </p>
@@ -133,9 +153,13 @@ export default async function HomePage() {
             </div>
 
             <div className="flex items-start gap-3">
-              <span className="text-2xl">✅</span>
+              <div className="flex-shrink-0 w-6 h-6 rounded-full bg-success-100 flex items-center justify-center">
+                <svg className="w-4 h-4 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
               <div>
-                <h4 className="font-semibold">Exportar Relatórios</h4>
+                <h4 className="font-semibold text-gray-900">Exportar Relatórios</h4>
                 <p className="text-sm text-gray-600">
                   Baixe relatórios nos formatos CSV e PDF
                 </p>
