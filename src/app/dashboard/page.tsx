@@ -130,7 +130,7 @@ export default function DashboardPage() {
                       data-testid="transaction-item"
                     >
                       <div className="flex-1">
-                        <p className="font-medium">{transaction.description}</p>
+                        <p className="font-medium text-gray-900">{transaction.description}</p>
                         <p className="text-sm text-gray-600">
                           {new Date(transaction.date).toLocaleDateString()} •{" "}
                           {transaction.category.name}
