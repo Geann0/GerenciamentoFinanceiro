@@ -22,7 +22,11 @@ export async function GET(request: NextRequest) {
       endDate
     );
 
-    return NextResponse.json(statistics);
+    return NextResponse.json(statistics, {
+      headers: {
+        'Cache-Control': 'private, max-age=180', // 3 minutos
+      },
+    });
   } catch (error) {
     console.error("Get statistics error:", error);
     return NextResponse.json(

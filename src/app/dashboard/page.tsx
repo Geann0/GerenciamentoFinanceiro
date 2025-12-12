@@ -16,24 +16,48 @@ export default function DashboardPage() {
     "statistics",
     async () => {
       const response = await fetch("/api/transactions/statistics");
+      if (!response.ok) throw new Error('Failed to fetch');
       return response.json();
+    },
+    {
+      staleTime: 3 * 60 * 1000, // 3 minutos
+      cacheTime: 10 * 60 * 1000,
     }
   );
 
-  const { data: categories } = useQuery("categories", async () => {
-    const response = await fetch("/api/categories?all=true");
-    return response.json();
-  });
+  const { data: categories } = useQuery(
+    "categories",
+    async () => {
+      const response = await fetch("/api/categories?all=true");
+      if (!response.ok) throw new Error('Failed to fetch');
+      return response.json();
+    },
+    {
+      staleTime: 5 * 60 * 1000, // 5 minutos (raramente muda)
+      cacheTime: 15 * 60 * 1000,
+    }
+  );
 
-  const { data: transactions } = useQuery("transactions", async () => {
-    const response = await fetch("/api/transactions?limit=10");
-    return response.json();
-  });
+  const { data: transactions } = useQuery(
+    "dashboard-transactions",
+    async () => {
+      const response = await fetch("/api/transactions?limit=5");
+      if (!response.ok) throw new Error('Failed to fetch');
+      return response.json();
+    },
+    {
+      staleTime: 2 * 60 * 1000, // 2 minutos
+      cacheTime: 10 * 60 * 1000,
+    }
+  );
 
   if (statsLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-xl">Carregando...</div>
+      <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mb-4"></div>
+          <div className="text-lg text-gray-700">Carregando seu painel...</div>
+        </div>
       </div>
     );
   }

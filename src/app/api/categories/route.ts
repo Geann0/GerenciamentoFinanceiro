@@ -45,7 +45,11 @@ export async function GET(request: NextRequest) {
       ? await categoryService.getAllCategories(user.id)
       : await categoryService.getCategories(user.id);
 
-    return NextResponse.json(categories);
+    return NextResponse.json(categories, {
+      headers: {
+        'Cache-Control': 'private, max-age=300', // 5 minutos
+      },
+    });
   } catch (error) {
     console.error("Get categories error:", error);
     return NextResponse.json(

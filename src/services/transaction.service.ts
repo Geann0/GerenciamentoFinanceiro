@@ -256,10 +256,20 @@ export class TransactionService {
       }))
       .filter((stat) => stat.category); // Remove entries without category
 
-    // Get all transactions for monthly grouping (SQLite compatible)
+    // Get last 6 months only for monthly stats (optimized)
+    const sixMonthsAgo = new Date();
+    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+    
+    const monthlyWhere = { ...where };
+    if (!monthlyWhere.date) monthlyWhere.date = {};
+    if (!monthlyWhere.date.gte || monthlyWhere.date.gte < sixMonthsAgo) {
+      monthlyWhere.date.gte = sixMonthsAgo;
+    }
+
     const transactions = await prisma.transaction.findMany({
-      where,
+      where: monthlyWhere,
       select: {
+        id: true,
         date: true,
         type: true,
         amount: true,
@@ -286,9 +296,9 @@ export class TransactionService {
       entry.count += 1;
     });
 
-    const monthlyStats = Array.from(monthlyMap.values()).sort((a, b) =>
-      b.month.localeCompare(a.month)
-    );
+    const monthlyStats = Array.from(monthlyMap.values())
+      .sort((a, b) => b.month.localeCompare(a.month))
+      .slice(0, 12); // Limitar a 12 meses
 
     return {
       balance,

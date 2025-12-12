@@ -67,7 +67,11 @@ export async function GET(request: NextRequest) {
 
     const result = await transactionService.getTransactions(user.id, filters);
 
-    return NextResponse.json(result);
+    return NextResponse.json(result, {
+      headers: {
+        'Cache-Control': 'private, max-age=120', // 2 minutos
+      },
+    });
   } catch (error) {
     console.error("Get transactions error:", error);
     return NextResponse.json(
