@@ -29,7 +29,7 @@ export default function CategoriesPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      if (!response.ok) throw new Error("Failed to create category");
+      if (!response.ok) throw new Error("Falha ao criar categoria");
       return response.json();
     },
     {

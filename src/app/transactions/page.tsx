@@ -32,7 +32,7 @@ export default function TransactionsPage() {
       const response = await fetch(`/api/transactions/${id}`, {
         method: "DELETE",
       });
-      if (!response.ok) throw new Error("Failed to delete");
+      if (!response.ok) throw new Error("Falha ao deletar");
       return response.json();
     },
     {
