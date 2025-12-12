@@ -40,13 +40,33 @@ export default function CategoriesPage() {
       return response.json();
     },
     {
+      onMutate: async (newCategory) => {
+        // Cancelar queries em andamento
+        await queryClient.cancelQueries("categories");
+        
+        // Snapshot do valor anterior
+        const previousCategories = queryClient.getQueryData("categories");
+        
+        // Otimisticamente atualizar
+        queryClient.setQueryData("categories", (old: any) => [
+          ...old,
+          { ...newCategory, id: "temp-" + Date.now() }
+        ]);
+        
+        return { previousCategories };
+      },
       onSuccess: () => {
         queryClient.invalidateQueries("categories");
         setFormData({ name: "", color: "#3B82F6", description: "" });
         setShowForm(false);
       },
-      onError: (error: any) => {
+      onError: (error: any, newCategory, context: any) => {
+        // Reverter em caso de erro
+        queryClient.setQueryData("categories", context.previousCategories);
         setToast({ message: error.message, type: "error" });
+      },
+      onSettled: () => {
+        queryClient.invalidateQueries("categories");
       },
     }
   );
@@ -65,12 +85,30 @@ export default function CategoriesPage() {
       return response.json();
     },
     {
+      onMutate: async (deletedId) => {
+        // Cancelar queries em andamento
+        await queryClient.cancelQueries("categories");
+        
+        // Snapshot do valor anterior
+        const previousCategories = queryClient.getQueryData("categories");
+        
+        // Otimisticamente remover da lista
+        queryClient.setQueryData("categories", (old: any) =>
+          old?.filter((cat: any) => cat.id !== deletedId)
+        );
+        
+        return { previousCategories };
+      },
       onSuccess: () => {
-        queryClient.invalidateQueries("categories");
         setToast({ message: "Categoria deletada com sucesso!", type: "success" });
       },
-      onError: (error: any) => {
+      onError: (error: any, deletedId, context: any) => {
+        // Reverter em caso de erro
+        queryClient.setQueryData("categories", context.previousCategories);
         setToast({ message: error.message, type: "error" });
+      },
+      onSettled: () => {
+        queryClient.invalidateQueries("categories");
       },
     }
   );

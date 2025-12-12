@@ -36,9 +36,31 @@ export default function TransactionsPage() {
       return response.json();
     },
     {
-      onSuccess: () => {
+      onMutate: async (deletedId) => {
+        // Cancelar queries em andamento
+        await queryClient.cancelQueries("transactions");
+        await queryClient.cancelQueries("statistics");
+        await queryClient.cancelQueries("dashboard-transactions");
+        
+        // Snapshot do valor anterior
+        const previousTransactions = queryClient.getQueryData("transactions");
+        
+        // Otimisticamente remover da lista
+        queryClient.setQueryData("transactions", (old: any) => ({
+          ...old,
+          data: old?.data?.filter((t: any) => t.id !== deletedId) || []
+        }));
+        
+        return { previousTransactions };
+      },
+      onError: (error: any, deletedId, context: any) => {
+        // Reverter em caso de erro
+        queryClient.setQueryData("transactions", context.previousTransactions);
+      },
+      onSettled: () => {
         queryClient.invalidateQueries("transactions");
         queryClient.invalidateQueries("statistics");
+        queryClient.invalidateQueries("dashboard-transactions");
       },
     }
   );
