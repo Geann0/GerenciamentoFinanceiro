@@ -41,12 +41,32 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">
-            Bem-vindo, {session?.user?.name}!
-          </h1>
-          <p className="text-gray-600">Aqui está sua visão financeira</p>
+        <div className="mb-8 flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">
+              Bem-vindo, {session?.user?.name}!
+            </h1>
+            <p className="text-gray-600">Aqui está sua visão financeira</p>
+          </div>
+          <Button
+            variant="primary"
+            onClick={() => setShowTransactionForm(!showTransactionForm)}
+            data-testid="create-transaction-btn"
+          >
+            {showTransactionForm ? "Cancelar" : "+ Nova Transação"}
+          </Button>
         </div>
+
+        {/* Transaction Form - Appears at Top */}
+        {showTransactionForm && categories && (
+          <Card className="mb-8">
+            <h4 className="text-xl font-semibold mb-4">Nova Transação</h4>
+            <TransactionForm
+              categories={categories}
+              onSuccess={() => setShowTransactionForm(false)}
+            />
+          </Card>
+        )}
 
         {/* Balance Overview */}
         <div className="grid md:grid-cols-3 gap-6 mb-8">
@@ -141,40 +161,20 @@ export default function DashboardPage() {
             <Card title="Ações Rápidas">
               <div className="space-y-3">
                 <Button
-                  variant="primary"
-                  className="w-full"
-                  onClick={() => setShowTransactionForm(!showTransactionForm)}
-                  data-testid="create-transaction-btn"
-                >
-                  {showTransactionForm
-                    ? "Ocultar Formulário"
-                    : "+ Nova Transação"}
-                </Button>
-                <Button
                   variant="secondary"
                   className="w-full"
                   onClick={() => (window.location.href = "/reports")}
                 >
-                  📊 Ver Relatórios
+                  Ver Relatórios
                 </Button>
                 <Button
                   variant="secondary"
                   className="w-full"
                   onClick={() => (window.location.href = "/categories")}
                 >
-                  🏷️ Gerenciar Categorias
+                  Gerenciar Categorias
                 </Button>
               </div>
-
-              {showTransactionForm && categories && (
-                <div className="mt-6 pt-6 border-t">
-                  <h4 className="font-semibold mb-4">Nova Transação</h4>
-                  <TransactionForm
-                    categories={categories}
-                    onSuccess={() => setShowTransactionForm(false)}
-                  />
-                </div>
-              )}
             </Card>
           </div>
         </div>

@@ -9,10 +9,10 @@ import { useMutation, useQueryClient } from 'react-query'
 
 const transactionSchema = z.object({
   type: z.enum(['INCOME', 'EXPENSE']),
-  amount: z.string().min(1, 'Amount is required'),
-  description: z.string().min(1, 'Description is required'),
-  date: z.string().min(1, 'Date is required'),
-  categoryId: z.string().min(1, 'Category is required'),
+  amount: z.string().min(1, 'Valor é obrigatório'),
+  description: z.string().min(1, 'Descrição é obrigatória'),
+  date: z.string().min(1, 'Data é obrigatória'),
+  categoryId: z.string().min(1, 'Categoria é obrigatória'),
 })
 
 type TransactionFormData = z.infer<typeof transactionSchema>
@@ -70,7 +70,7 @@ export function TransactionForm({ onSuccess, categories }: TransactionFormProps)
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Type <span className="text-danger-500">*</span>
+          Tipo <span className="text-danger-500">*</span>
         </label>
         <div className="flex gap-4">
           <label className="flex items-center">
@@ -80,7 +80,7 @@ export function TransactionForm({ onSuccess, categories }: TransactionFormProps)
               {...register('type')}
               className="mr-2"
             />
-            <span className="text-success-600">Income</span>
+            <span className="text-success-600">Receita</span>
           </label>
           <label className="flex items-center">
             <input
@@ -89,7 +89,7 @@ export function TransactionForm({ onSuccess, categories }: TransactionFormProps)
               {...register('type')}
               className="mr-2"
             />
-            <span className="text-danger-600">Expense</span>
+            <span className="text-danger-600">Despesa</span>
           </label>
         </div>
         {errors.type && (
@@ -98,7 +98,7 @@ export function TransactionForm({ onSuccess, categories }: TransactionFormProps)
       </div>
 
       <Input
-        label="Amount"
+        label="Valor"
         type="number"
         step="0.01"
         placeholder="0.00"
@@ -108,15 +108,15 @@ export function TransactionForm({ onSuccess, categories }: TransactionFormProps)
       />
 
       <Input
-        label="Description"
-        placeholder="Enter description"
+        label="Descrição"
+        placeholder="Digite a descrição"
         {...register('description')}
         error={errors.description?.message}
         required
       />
 
       <Input
-        label="Date"
+        label="Data"
         type="date"
         {...register('date')}
         error={errors.date?.message}
@@ -125,13 +125,13 @@ export function TransactionForm({ onSuccess, categories }: TransactionFormProps)
 
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">
-          Category <span className="text-danger-500">*</span>
+          Categoria <span className="text-danger-500">*</span>
         </label>
         <select
           {...register('categoryId')}
           className="input"
         >
-          <option value="">Select category</option>
+          <option value="">Selecione a categoria</option>
           {categories.map((category) => (
             <option key={category.id} value={category.id}>
               {category.name}
@@ -149,7 +149,7 @@ export function TransactionForm({ onSuccess, categories }: TransactionFormProps)
         className="w-full"
         isLoading={createTransaction.isLoading}
       >
-        Create Transaction
+        Criar Transação
       </Button>
     </form>
   )
