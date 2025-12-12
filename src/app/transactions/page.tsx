@@ -66,11 +66,11 @@ export default function TransactionsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8 flex justify-between items-center">
+      <div className="container mx-auto px-4 py-6 sm:py-8">
+        <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Transações</h1>
-            <p className="text-gray-600">Gerencie suas receitas e despesas</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Transações</h1>
+            <p className="text-sm sm:text-base text-gray-600">Gerencie suas receitas e despesas</p>
           </div>
           <Button
             onClick={() => {
@@ -78,6 +78,7 @@ export default function TransactionsPage() {
               setShowForm(!showForm);
             }}
             variant="primary"
+            className="w-full sm:w-auto whitespace-nowrap"
           >
             {showForm ? "Cancelar" : "+ Nova Transação"}
           </Button>
@@ -99,47 +100,50 @@ export default function TransactionsPage() {
         )}
 
         <Card>
-          <div className="mb-4 flex gap-2">
+          <div className="mb-4 flex flex-wrap gap-2">
             <Button
               variant={filter === "all" ? "primary" : "secondary"}
               onClick={() => setFilter("all")}
+              className="flex-1 sm:flex-initial text-sm"
             >
               Todas
             </Button>
             <Button
               variant={filter === "INCOME" ? "primary" : "secondary"}
               onClick={() => setFilter("INCOME")}
+              className="flex-1 sm:flex-initial text-sm"
             >
               Receitas
             </Button>
             <Button
               variant={filter === "EXPENSE" ? "primary" : "secondary"}
               onClick={() => setFilter("EXPENSE")}
+              className="flex-1 sm:flex-initial text-sm"
             >
               Despesas
             </Button>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full">
+          <div className="overflow-x-auto -mx-4 sm:mx-0">
+            <table className="w-full min-w-[640px]">
               <thead className="bg-gray-50 border-b">
                 <tr>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">
+                  <th className="px-2 sm:px-4 py-3 text-left text-xs sm:text-sm font-semibold text-gray-900">
                     Data
                   </th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">
+                  <th className="px-2 sm:px-4 py-3 text-left text-xs sm:text-sm font-semibold text-gray-900">
                     Descrição
                   </th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">
+                  <th className="px-2 sm:px-4 py-3 text-left text-xs sm:text-sm font-semibold text-gray-900">
                     Categoria
                   </th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">
+                  <th className="px-2 sm:px-4 py-3 text-left text-xs sm:text-sm font-semibold text-gray-900">
                     Tipo
                   </th>
-                  <th className="px-4 py-3 text-right text-sm font-semibold text-gray-900">
+                  <th className="px-2 sm:px-4 py-3 text-right text-xs sm:text-sm font-semibold text-gray-900">
                     Valor
                   </th>
-                  <th className="px-4 py-3 text-right text-sm font-semibold text-gray-900">
+                  <th className="px-2 sm:px-4 py-3 text-right text-xs sm:text-sm font-semibold text-gray-900">
                     Ações
                   </th>
                 </tr>
@@ -157,13 +161,13 @@ export default function TransactionsPage() {
                 ) : (
                   filteredTransactions.map((transaction: any) => (
                     <tr key={transaction.id} className="hover:bg-gray-50">
-                      <td className="px-4 py-3 text-sm text-gray-900">
-                        {new Date(transaction.date).toLocaleDateString()}
+                      <td className="px-2 sm:px-4 py-3 text-xs sm:text-sm text-gray-900 whitespace-nowrap">
+                        {new Date(transaction.date).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })}
                       </td>
-                      <td className="px-4 py-3 text-sm font-medium text-gray-900">
-                        {transaction.description}
+                      <td className="px-2 sm:px-4 py-3 text-xs sm:text-sm font-medium text-gray-900">
+                        <div className="max-w-[120px] sm:max-w-none truncate">{transaction.description}</div>
                       </td>
-                      <td className="px-4 py-3 text-sm">
+                      <td className="px-2 sm:px-4 py-3 text-xs sm:text-sm">
                         <span
                           className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium"
                           style={{
@@ -197,32 +201,34 @@ export default function TransactionsPage() {
                         {transaction.type === "INCOME" ? "+" : "-"}R$
                         {Number(transaction.amount).toFixed(2)}
                       </td>
-                      <td className="px-4 py-3 text-sm text-right space-x-2">
-                        <Button
-                          variant="secondary"
-                          onClick={() => {
-                            setEditingTransaction(transaction);
-                            setShowForm(true);
-                          }}
-                          className="text-xs"
-                        >
-                          Editar
-                        </Button>
-                        <Button
-                          variant="danger"
-                          onClick={() => {
-                            if (
-                              confirm(
-                                "Tem certeza que deseja deletar esta transação?"
-                              )
-                            ) {
-                              deleteTransaction.mutate(transaction.id);
-                            }
-                          }}
-                          className="text-xs"
-                        >
-                          Deletar
-                        </Button>
+                      <td className="px-2 sm:px-4 py-3 text-xs sm:text-sm text-right">
+                        <div className="flex flex-col sm:flex-row gap-1 sm:gap-2 justify-end">
+                          <Button
+                            variant="secondary"
+                            onClick={() => {
+                              setEditingTransaction(transaction);
+                              setShowForm(true);
+                            }}
+                            className="text-xs px-2 py-1"
+                          >
+                            Editar
+                          </Button>
+                          <Button
+                            variant="danger"
+                            onClick={() => {
+                              if (
+                                confirm(
+                                  "Tem certeza que deseja deletar esta transação?"
+                                )
+                              ) {
+                                deleteTransaction.mutate(transaction.id);
+                              }
+                            }}
+                            className="text-xs px-2 py-1"
+                          >
+                            Deletar
+                          </Button>
+                        </div>
                       </td>
                     </tr>
                   ))

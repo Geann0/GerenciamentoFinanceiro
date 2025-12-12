@@ -59,17 +59,17 @@ export default function ReportsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">
+      <div className="container mx-auto px-4 py-6 sm:py-8">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
             Relatórios Financeiros
           </h1>
-          <p className="text-gray-600">Analise seus dados financeiros</p>
+          <p className="text-sm sm:text-base text-gray-600">Analise seus dados financeiros</p>
         </div>
 
         <Card className="mb-6">
-          <h2 className="text-xl font-semibold mb-4">Filtros</h2>
-          <div className="grid md:grid-cols-3 gap-4">
+          <h2 className="text-lg sm:text-xl font-semibold mb-4">Filtros</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Data Inicial
@@ -108,39 +108,39 @@ export default function ReportsPage() {
           </div>
         ) : report ? (
           <>
-            <div className="grid md:grid-cols-3 gap-6 mb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6">
               <Card className="bg-gradient-to-br from-success-500 to-success-600 text-white">
-                <h3 className="text-lg font-medium mb-2">Receitas Totais</h3>
-                <p className="text-3xl font-bold">
+                <h3 className="text-base sm:text-lg font-medium mb-2">Receitas Totais</h3>
+                <p className="text-2xl sm:text-3xl font-bold">
                   R$ {Number(report.summary?.totalIncome || 0).toFixed(2)}
                 </p>
               </Card>
 
               <Card className="bg-gradient-to-br from-danger-500 to-danger-600 text-white">
-                <h3 className="text-lg font-medium mb-2">Despesas Totais</h3>
-                <p className="text-3xl font-bold">
+                <h3 className="text-base sm:text-lg font-medium mb-2">Despesas Totais</h3>
+                <p className="text-2xl sm:text-3xl font-bold">
                   R$ {Number(report.summary?.totalExpense || 0).toFixed(2)}
                 </p>
               </Card>
 
               <Card className="bg-gradient-to-br from-primary-500 to-primary-600 text-white">
-                <h3 className="text-lg font-medium mb-2">Saldo Líquido</h3>
-                <p className="text-3xl font-bold">
+                <h3 className="text-base sm:text-lg font-medium mb-2">Saldo Líquido</h3>
+                <p className="text-2xl sm:text-3xl font-bold">
                   R$ {Number(report.summary?.balance || 0).toFixed(2)}
                 </p>
               </Card>
             </div>
 
             <Card className="mb-6">
-              <h2 className="text-xl font-semibold mb-4">
+              <h2 className="text-lg sm:text-xl font-semibold mb-4">
                 Opções de Exportação
               </h2>
-              <div className="flex gap-4">
-                <Button onClick={handleExportCSV} variant="secondary">
-                  📊 Exportar para CSV
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <Button onClick={handleExportCSV} variant="secondary" className="w-full sm:w-auto text-sm">
+                  📊 Exportar CSV
                 </Button>
-                <Button onClick={handleExportPDF} variant="secondary">
-                  📄 Exportar para PDF
+                <Button onClick={handleExportPDF} variant="secondary" className="w-full sm:w-auto text-sm">
+                  📄 Exportar PDF
                 </Button>
               </div>
             </Card>
@@ -148,27 +148,27 @@ export default function ReportsPage() {
             {report.categoryBreakdown &&
               report.categoryBreakdown.length > 0 && (
                 <Card>
-                  <h2 className="text-xl font-semibold mb-4">
+                  <h2 className="text-lg sm:text-xl font-semibold mb-4">
                     Detalhamento por Categoria
                   </h2>
-                  <div className="overflow-x-auto">
-                    <table className="w-full">
+                  <div className="overflow-x-auto -mx-4 sm:mx-0">
+                    <table className="w-full min-w-[600px]">
                       <thead className="bg-gray-50 border-b">
                         <tr>
-                          <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">
+                          <th className="px-2 sm:px-4 py-3 text-left text-xs sm:text-sm font-semibold text-gray-900">
                             Categoria
                           </th>
-                          <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">
+                          <th className="px-2 sm:px-4 py-3 text-left text-xs sm:text-sm font-semibold text-gray-900">
                             Tipo
                           </th>
-                          <th className="px-4 py-3 text-right text-sm font-semibold text-gray-900">
+                          <th className="px-2 sm:px-4 py-3 text-right text-xs sm:text-sm font-semibold text-gray-900">
                             Transações
                           </th>
-                          <th className="px-4 py-3 text-right text-sm font-semibold text-gray-900">
+                          <th className="px-2 sm:px-4 py-3 text-right text-xs sm:text-sm font-semibold text-gray-900">
                             Valor Total
                           </th>
-                          <th className="px-4 py-3 text-right text-sm font-semibold text-gray-900">
-                            Porcentagem
+                          <th className="px-2 sm:px-4 py-3 text-right text-xs sm:text-sm font-semibold text-gray-900">
+                            %
                           </th>
                         </tr>
                       </thead>

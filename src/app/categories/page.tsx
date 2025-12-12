@@ -66,13 +66,13 @@ export default function CategoriesPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8 flex justify-between items-center">
+      <div className="container mx-auto px-4 py-6 sm:py-8">
+        <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Categorias</h1>
-            <p className="text-gray-600">Organize suas transações</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Categorias</h1>
+            <p className="text-sm sm:text-base text-gray-600">Organize suas transações</p>
           </div>
-          <Button onClick={() => setShowForm(!showForm)} variant="primary">
+          <Button onClick={() => setShowForm(!showForm)} variant="primary" className="w-full sm:w-auto whitespace-nowrap">
             {showForm ? "Cancelar" : "+ Nova Categoria"}
           </Button>
         </div>
