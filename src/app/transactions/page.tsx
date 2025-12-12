@@ -157,10 +157,10 @@ export default function TransactionsPage() {
                 ) : (
                   filteredTransactions.map((transaction: any) => (
                     <tr key={transaction.id} className="hover:bg-gray-50">
-                      <td className="px-4 py-3 text-sm">
+                      <td className="px-4 py-3 text-sm text-gray-900">
                         {new Date(transaction.date).toLocaleDateString()}
                       </td>
-                      <td className="px-4 py-3 text-sm font-medium">
+                      <td className="px-4 py-3 text-sm font-medium text-gray-900">
                         {transaction.description}
                       </td>
                       <td className="px-4 py-3 text-sm">

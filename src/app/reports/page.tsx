@@ -200,7 +200,7 @@ export default function ReportsPage() {
                                     : "DESPESA"}
                                 </span>
                               </td>
-                              <td className="px-4 py-3 text-sm text-right">
+                              <td className="px-4 py-3 text-sm text-right text-gray-900">
                                 {item.count}
                               </td>
                               <td
@@ -212,7 +212,7 @@ export default function ReportsPage() {
                               >
                                 R$ {Number(item.total).toFixed(2)}
                               </td>
-                              <td className="px-4 py-3 text-sm text-right">
+                              <td className="px-4 py-3 text-sm text-right text-gray-900">
                                 {item.percentage?.toFixed(1)}%
                               </td>
                             </tr>
