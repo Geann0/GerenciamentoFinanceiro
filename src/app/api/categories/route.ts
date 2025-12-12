@@ -53,7 +53,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(categories, {
       headers: {
-        'Cache-Control': 'private, max-age=300', // 5 minutos
+        'Cache-Control': 'no-store, must-revalidate',
       },
     });
   } catch (error) {

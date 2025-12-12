@@ -21,9 +21,14 @@ export default function CategoriesPage() {
   });
 
   const { data: categories, isLoading } = useQuery("categories", async () => {
-    const response = await fetch("/api/categories?all=true");
+    const response = await fetch("/api/categories?all=true", {
+      cache: 'no-store',
+    });
     if (!response.ok) throw new Error('Failed to fetch');
     return response.json();
+  }, {
+    staleTime: 0,
+    cacheTime: 0,
   });
 
   const createCategory = useMutation(
@@ -40,33 +45,17 @@ export default function CategoriesPage() {
       return response.json();
     },
     {
-      onMutate: async (newCategory) => {
-        // Cancelar queries em andamento
-        await queryClient.cancelQueries("categories");
-        
-        // Snapshot do valor anterior
-        const previousCategories = queryClient.getQueryData("categories");
-        
-        // Otimisticamente atualizar
-        queryClient.setQueryData("categories", (old: any) => [
-          ...old,
-          { ...newCategory, id: "temp-" + Date.now() }
-        ]);
-        
-        return { previousCategories };
-      },
-      onSuccess: () => {
-        queryClient.invalidateQueries("categories");
+      onSuccess: (newCategory) => {
+        // Atualizar cache imediatamente com a nova categoria
+        queryClient.setQueryData("categories", (old: any) => {
+          if (!old) return [newCategory];
+          return [...old, newCategory];
+        });
         setFormData({ name: "", color: "#3B82F6", description: "" });
         setShowForm(false);
       },
-      onError: (error: any, newCategory, context: any) => {
-        // Reverter em caso de erro
-        queryClient.setQueryData("categories", context.previousCategories);
+      onError: (error: any) => {
         setToast({ message: error.message, type: "error" });
-      },
-      onSettled: () => {
-        queryClient.invalidateQueries("categories");
       },
     }
   );
@@ -85,30 +74,15 @@ export default function CategoriesPage() {
       return response.json();
     },
     {
-      onMutate: async (deletedId) => {
-        // Cancelar queries em andamento
-        await queryClient.cancelQueries("categories");
-        
-        // Snapshot do valor anterior
-        const previousCategories = queryClient.getQueryData("categories");
-        
-        // Otimisticamente remover da lista
+      onSuccess: (data, deletedId) => {
+        // Remover da lista imediatamente
         queryClient.setQueryData("categories", (old: any) =>
-          old?.filter((cat: any) => cat.id !== deletedId)
+          old?.filter((cat: any) => cat.id !== deletedId) || []
         );
-        
-        return { previousCategories };
-      },
-      onSuccess: () => {
         setToast({ message: "Categoria deletada com sucesso!", type: "success" });
       },
-      onError: (error: any, deletedId, context: any) => {
-        // Reverter em caso de erro
-        queryClient.setQueryData("categories", context.previousCategories);
+      onError: (error: any) => {
         setToast({ message: error.message, type: "error" });
-      },
-      onSettled: () => {
-        queryClient.invalidateQueries("categories");
       },
     }
   );
