@@ -1,7 +1,17 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const session = await getServerSession(authOptions);
+  
+  // Se usuário está logado, redireciona para dashboard
+  if (session) {
+    redirect("/dashboard");
+  }
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-primary-50 to-white">
       <div className="container mx-auto px-4 py-16">

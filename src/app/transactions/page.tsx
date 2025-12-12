@@ -46,7 +46,7 @@ export default function TransactionsPage() {
   if (!session) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="text-xl">Please log in to view transactions</div>
+        <div className="text-xl">Faça login para ver as transações</div>
       </div>
     );
   }
@@ -54,7 +54,7 @@ export default function TransactionsPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="text-xl">Loading...</div>
+        <div className="text-xl">Carregando...</div>
       </div>
     );
   }
@@ -69,8 +69,8 @@ export default function TransactionsPage() {
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8 flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Transactions</h1>
-            <p className="text-gray-600">Manage your income and expenses</p>
+            <h1 className="text-3xl font-bold text-gray-900">Transações</h1>
+            <p className="text-gray-600">Gerencie suas receitas e despesas</p>
           </div>
           <Button
             onClick={() => {
@@ -79,7 +79,7 @@ export default function TransactionsPage() {
             }}
             variant="primary"
           >
-            {showForm ? "Cancel" : "+ New Transaction"}
+            {showForm ? "Cancelar" : "+ Nova Transação"}
           </Button>
         </div>
 
