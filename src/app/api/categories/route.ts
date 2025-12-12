@@ -64,3 +64,37 @@ export async function GET(request: NextRequest) {
     );
   }
 }
+
+export async function DELETE(request: NextRequest) {
+  try {
+    const user = await authenticateRequest();
+    if (!user) return unauthorizedResponse();
+
+    const body = await request.json();
+    const { id } = body;
+
+    if (!id) {
+      return NextResponse.json(
+        { error: "Category ID is required" },
+        { status: 400 }
+      );
+    }
+
+    await categoryService.deleteCategory(id, user.id);
+
+    return NextResponse.json(
+      { success: true },
+      {
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+        },
+      }
+    );
+  } catch (error: any) {
+    console.error("Delete category error:", error);
+    return NextResponse.json(
+      { error: error.message || "Failed to delete category" },
+      { status: 500 }
+    );
+  }
+}

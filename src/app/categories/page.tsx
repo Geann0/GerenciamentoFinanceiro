@@ -41,10 +41,32 @@ export default function CategoriesPage() {
         queryClient.invalidateQueries("categories");
         setFormData({ name: "", color: "#3B82F6", description: "" });
         setShowForm(false);
-        alert("Categoria criada com sucesso!");
       },
       onError: (error: any) => {
         alert("Erro ao criar categoria: " + error.message);
+      },
+    }
+  );
+
+  const deleteCategory = useMutation(
+    async (id: string) => {
+      const response = await fetch("/api/categories", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id }),
+      });
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || "Falha ao deletar categoria");
+      }
+      return response.json();
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("categories");
+      },
+      onError: (error: any) => {
+        alert("Erro ao deletar categoria: " + error.message);
       },
     }
   );
@@ -157,12 +179,12 @@ export default function CategoriesPage() {
             >
               <div className="flex items-start gap-4">
                 <div
-                  className="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold text-xl"
+                  className="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold text-xl flex-shrink-0"
                   style={{ backgroundColor: category.color }}
                 >
                   {category.name.charAt(0).toUpperCase()}
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <h3 className="font-semibold text-lg text-black">
                     {category.name}
                   </h3>
@@ -172,6 +194,19 @@ export default function CategoriesPage() {
                     </p>
                   )}
                 </div>
+                <button
+                  onClick={() => {
+                    if (confirm(`Deseja realmente deletar a categoria "${category.name}"?`)) {
+                      deleteCategory.mutate(category.id);
+                    }
+                  }}
+                  className="text-danger-600 hover:text-danger-700 p-2 hover:bg-danger-50 rounded-lg transition-colors flex-shrink-0"
+                  title="Deletar categoria"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </button>
               </div>
             </Card>
           ))}
