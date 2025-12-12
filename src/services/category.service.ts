@@ -91,13 +91,17 @@ export class CategoryService {
   }
 
   async deleteCategory(categoryId: string, userId: string) {
+    console.log("Service deleteCategory - categoryId:", categoryId, "userId:", userId);
+    
     // Check if category exists and belongs to user
     const category = await prisma.category.findFirst({
       where: { id: categoryId, userId },
     });
 
+    console.log("Category found:", category);
+
     if (!category) {
-      throw new Error("Categoria não encontrada");
+      throw new Error("Categoria não encontrada ou você não tem permissão para deletá-la");
     }
 
     // Check if category has transactions
@@ -105,19 +109,25 @@ export class CategoryService {
       where: { categoryId },
     });
 
+    console.log("Transaction count:", transactionCount);
+
     if (transactionCount > 0) {
       throw new Error(`Não é possível deletar esta categoria pois ela possui ${transactionCount} transação(ões) associada(s)`);
     }
 
     // Delete subcategories first
-    await prisma.category.deleteMany({
+    const deletedSubs = await prisma.category.deleteMany({
       where: { parentId: categoryId, userId },
     });
 
+    console.log("Deleted subcategories:", deletedSubs.count);
+
     // Delete the category
-    await prisma.category.delete({
+    const deleted = await prisma.category.delete({
       where: { id: categoryId },
     });
+
+    console.log("Category deleted:", deleted);
   }
 
   async getCategoryStatistics(

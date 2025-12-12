@@ -73,6 +73,9 @@ export async function DELETE(request: NextRequest) {
     const body = await request.json();
     const { id } = body;
 
+    console.log("Delete category - User ID:", user.id);
+    console.log("Delete category - Category ID:", id);
+
     if (!id) {
       return NextResponse.json(
         { error: "Category ID is required" },
@@ -83,7 +86,7 @@ export async function DELETE(request: NextRequest) {
     await categoryService.deleteCategory(id, user.id);
 
     return NextResponse.json(
-      { success: true },
+      { success: true, message: "Categoria deletada com sucesso" },
       {
         headers: {
           'Cache-Control': 'no-cache, no-store, must-revalidate',
@@ -94,7 +97,7 @@ export async function DELETE(request: NextRequest) {
     console.error("Delete category error:", error);
     return NextResponse.json(
       { error: error.message || "Failed to delete category" },
-      { status: 500 }
+      { status: 400 }
     );
   }
 }
